@@ -18,4 +18,6 @@
 .idea
 .env.local
 .env.prod
+vendor/
+var/
 
