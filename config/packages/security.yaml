@@ -1,13 +1,29 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory: { memory: null }
+        api_key_user_provider:
+            entity:
+                class: User
+                property: token
     firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
+        api:
+            pattern: ^/api/
+            guard:
+                authenticators:
+                - App\Security\AppTokenAuthenticator
+#        dev:
+#            pattern: ^/(_(profiler|wdt)|css|images|js)/
+#            security: false
         main:
+            pattern: ^
             anonymous: lazy
+            guard:
+                authenticators:
+                    - App\Security\AppAuthAuthenticator
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
