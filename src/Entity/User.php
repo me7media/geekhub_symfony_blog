@@ -30,7 +30,7 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=255)
      */
     private $password;
 
@@ -100,9 +100,9 @@ class User implements UserInterface
         return $this;
     }
 
-    public function setToken($token, $apiToken): self
+    public function setToken($token): self
     {
-        $this->token = $apiToken;
+        $this->token = $token;
         return $this;
     }
 
@@ -111,7 +111,7 @@ class User implements UserInterface
         return $this->token;
     }
 
-    public function setCreatedAt($c): self
+    public function setCreatedAt($created_at): self
     {
         $this->created_at = new \DateTime("now");
         return $this;
